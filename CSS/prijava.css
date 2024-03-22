@@ -1,0 +1,38 @@
+.big_text, .medium_text {
+    font-family: 'Open Sans', sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.big_text {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+.medium_text {
+    font-size: 24px;
+    margin-bottom: 100px;
+}
+.butten {
+    width: 300px; 
+    height: 80px; 
+    font-size: 24px; 
+    font-family: 'Open Sans', sans-serif; 
+   background-color:  rgba(236, 17, 100);
+    color: #fff; 
+    border: none; 
+    border-radius: 40px; 
+    cursor: pointer; 
+    outline: none; 
+    position: relative; 
+    overflow: hidden;
+    transition: background-color 1s ease; 
+}
+
+
+.butten:hover {
+    background-color: rgb(181, 16, 16); 
+}
