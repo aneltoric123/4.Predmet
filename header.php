@@ -11,5 +11,5 @@
 </head>
 <body class="bg">
     <header class="main-header">
-        <div class="nav"><img src="slike\scv.png"></div>
+        <div class="nav"> <a href="index.php"><img src="slike\scv.png"></a></div>
     </header>

@@ -15,10 +15,10 @@ require_once 'header.php';
 <body>
     <div class="container">
         <div class="big_text mt-5">POZDRAVLJENI!</div>
-        <div class="medium_text mt-3">Prijava na dneve dejavnosti ŠC Velenje</div>
-        <form action="prijava_info.php">
+        <div class="medium_text mt-3">Tukaj se lahko prijavite na dneve dejavnosti na ŠC Velenje!</div>
+        <a href="prijava_1_del.php">
             <button class="butten">PRIJAVA</button>
-        </form>
+        </a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    border-spacing: 10px;
+    
+}
+.box {
+    width: 150px;
+    height: 150px ;
+    margin: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.scv{
+    width: 300px;
+    height:130px ;
+    margin: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.box:hover{
+    width: 170px;
+    height: 170px;
+    transition: 0.3s;
+    margin:30px;
+
+}
+.scv:hover{
+    width: 320px;
+    height:150px;
+    transition: 0.3s;
+    margin:30px;
+
+}
+.bg{
+    background-color: #f5f5f5;
+}
+
+
+
