@@ -1,4 +1,7 @@
-.container {
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+.container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -6,6 +9,14 @@
     height: 90vh;
     width: 100%;
     border-spacing: 10px;
+
+}
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 95vh;
     
 }
 .box {
@@ -46,6 +57,56 @@
 .bg{
     background-color: #f5f5f5;
 }
+
+.form {
+    width: 20%;
+    height: 45%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+label {
+    margin-top: 10%;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="password"] {
+    margin-top: 3%;
+	width: 80%;
+    padding: 10px;
+    padding-left:10%;
+    padding-right: 10%;
+	margin-bottom: 10px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.test{
+    color: black;
+}
+.back-button {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #000;
+    transition: background-c
+    olor 1s ease;
+    align-items: center;
+}
+
+.back-button:hover {
+    background-color: #ddd; /* Change to a slightly lighter shade on hover */
+}
+
 
 
 
