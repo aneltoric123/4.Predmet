@@ -53,4 +53,74 @@ body{
     width: 279px;
     text-align: center;
   }
-  
+  .input-group {
+    display: none;
+}
+
+.input-group.active {
+    display: block;
+}
+.button-group {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+.butten {
+  width: 250px; 
+  height: 60px; 
+  font-size: 24px; 
+  font-family: 'Open Sans', sans-serif; 
+ background-color:  rgba(236, 17, 100);
+  color: #fff; 
+  border: none; 
+  border-radius: 40px; 
+  cursor: pointer; 
+  outline: none; 
+  position: relative; 
+  overflow: hidden;
+  transition: background-color 1s ease; 
+}
+.butten:hover {
+  background-color: rgb(181, 16, 16); 
+}
+.prasanje textarea {
+  width: 300px;
+  height: 100px;
+  border-radius: 5px;
+  resize: vertical; 
+  padding: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+}
+
+.prasanje textarea:focus {
+  outline: none; 
+  border-color: rgba(236, 17, 100); 
+}
+.prasanje input[type="date"] {
+  width: 300px;
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px; 
+  font-size: 20px; 
+  border: 1px solid #ccc; 
+  box-sizing: border-box;
+}
+.prasanje select {
+  width: 300px;
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px; 
+  font-size: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; 
+  background-color: white; 
+  appearance: none; 
+
+  background-repeat: no-repeat; 
+  background-position: right center; 
+  padding-right: 30px; 
+}
+.prasanje input[type="date"]::placeholder {
+  color: transparent; 
+}

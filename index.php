@@ -16,7 +16,7 @@ require_once 'header.php';
     <div class="container">
         <div class="big_text mt-5">POZDRAVLJENI!</div>
         <div class="medium_text mt-3">Tukaj se lahko prijavite na dneve dejavnosti na ŠC Velenje!</div>
-        <a href="prijava_1_del.php">
+        <a href="prijava.php">
             <button class="butten">PRIJAVA</button>
         </a>
     </div>

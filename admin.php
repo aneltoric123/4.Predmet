@@ -1,6 +1,4 @@
 <?php
-
-
 include 'baza.php';
 $sola=isset($_GET['sola']) ? $_GET['sola'] : '';
 
@@ -43,7 +41,7 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Select School</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="CSS/admin.css">
     <link href="header.php" rel="import" type="text/php">
     <style>
@@ -52,20 +50,20 @@ $conn->close();
             padding: 0;
             background-color: <?php $id = isset($_GET['sola']) ? $_GET['sola'] : '';
                 switch ($id) {
-                    case 'ssgo':
-                        echo "#a6ce39"; // red
+                    case 'ŠSGO':
+                        echo "#a6ce39";
                         break;
-                    case 'ers':
-                        echo "#0094d9"; // green
+                    case 'ERŠ':
+                        echo "#0094d9"; 
                         break;
-                    case 'ssd':
-                        echo "#ee5ba0"; // blue
+                    case 'ŠSD':
+                        echo "#ee5ba0"; 
                         break;
-                    case 'gim':
-                        echo "#ffca05"; // white
+                    case 'GIM':
+                        echo "#ffca05"; 
                         break;
                     case 'vse':
-                        echo "#f5f5f5"; // black
+                        echo "#f5f5f5"; 
                         break;
                 }
             ?>;
@@ -80,16 +78,16 @@ $conn->close();
             height: 40px;
             background-color: <?php $id = isset($_GET['sola']) ? $_GET['sola'] : '';
                 switch ($id) {
-                    case 'ssgo':
+                    case 'ŠŠGO':
                         echo "#a6ce39";
                         break;
-                    case 'ers':
+                    case 'ERŠ':
                         echo "#0094d9"; 
                         break;
-                    case 'ssd':
+                    case 'ŠSD':
                         echo "#ee5ba0"; 
                         break;
-                    case 'gim':
+                    case 'GIM':
                         echo "#ffca05"; 
                         break;
                     case 'vse':
@@ -107,16 +105,16 @@ $conn->close();
         input[type="submit"]:hover {
             background-color:<?php $id = isset($_GET['sola']) ? $_GET['sola'] : '';
                 switch ($id) {
-                    case 'ssgo':
+                    case 'ŠSGO':
                         echo "#7c9b2a"; 
                         break;
-                    case 'ers':
+                    case 'ERŠ':
                         echo "#0071a5";
                         break;
-                    case 'ssd':
+                    case 'ŠSD':
                         echo "#bb477d"; 
                         break;
-                    case 'gim':
+                    case 'GIM':
                         echo "#cca104"; 
                         break;
                     case 'vse':
@@ -140,20 +138,20 @@ $conn->close();
         button[type="submit"] a:hover {
             background-color:<?php $id = isset($_GET['sola']) ? $_GET['sola'] : '';
                 switch ($id) {
-                    case 'ssgo':
-                        echo "#7c9b2a"; // red
+                    case 'ŠSGO':
+                        echo "#7c9b2a"; 
                         break;
-                    case 'ers':
-                        echo "#0071a5"; // green
+                    case 'ERŠ':
+                        echo "#0071a5"; 
                         break;
-                    case 'ssd':
-                        echo "#bb477d"; // blue
+                    case 'ŠSD':
+                        echo "#bb477d"; 
                         break;
-                    case 'gim':
-                        echo "#cca104"; // white
+                    case 'GIM':
+                        echo "#cca104"; 
                         break;
                     case 'vse':
-                        echo "#c2c2c2"; // black
+                        echo "#c2c2c2"; 
                         break;
                 }
             ?>;

@@ -6,15 +6,16 @@ if(isset($_COOKIE['admin'])){
     $admin = json_decode($_COOKIE['admin'], true);
     $username = $admin['username'];
     $test = $admin['ime'];
-} else {
+    $_SESSION['admin_id'] = $admin['admin_id'];
     
+} else {
     header('Location: logout.php');
     exit();
 };?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="CSS/navbar.css">
     <style>
         .navbar{
@@ -29,16 +30,16 @@ if(isset($_COOKIE['admin'])){
                 $id = $admin['ime'];
                 error_log($id);
                     switch ($id) {
-                        case 'ssgo':
+                        case 'ŠSGO':
                             echo "#a6ce39"; 
                             break;
-                        case 'ers':
+                        case 'ERŠ':
                             echo "#0094d9"; 
                             break;
-                        case 'ssd':
+                        case 'ŠSD':
                             echo "#ee5ba0"; 
                             break;
-                        case 'gim':
+                        case 'GIM':
                             echo "#ffca05"; 
                             break;
                         case 'vse':
