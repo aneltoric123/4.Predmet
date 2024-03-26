@@ -3,7 +3,7 @@ include 'baza.php';
 $sola=isset($_GET['sola']) ? $_GET['sola'] : '';
 
 if (isset($_SESSION['admin_id'])) {
-    header('Location: mainpage.php?filter=all');
+    header('Location: mainpage.php?filter=Vsi');
     exit;
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($row['ime_sole'] == $sola) {
                 $_SESSION['admin_id'] = $row['admin_id'];
                 setcookie('admin', json_encode(array('admin_id' => $row['admin_id'], 'username' => $row['username'], 'ime' => $row['ime_sole'])), time() + (86400 * 30), '/');
-                header('Location: mainpage.php?filter=all');
+                header('Location: mainpage.php?filter=Vsi');
                 exit;
             } else {
                 $error_message = 'Invalid username for this school';

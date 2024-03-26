@@ -1,6 +1,7 @@
 <?php
 include 'baza.php';
 include 'navbar.php';
+$current_date = date('Y-m-d');
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['action'])) {
     $id_prijave = $_POST['id_prijave'];
     $action = $_POST['action'];
@@ -12,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
     $stmt->execute();
     
     
-    header("Location: {$_SERVER['PHP_SELF']}");
+    header("Location: mainpage.php?filter=Vsi");
     exit();
 }
 $query_school = "SELECT s.ime_sole,s.id_sole
@@ -107,7 +108,23 @@ $conn->close();
 </head>
 <body>
 <div class="container">
-        <h1>Prijave za šolo <?php  echo $school_name;?></h1>
+        <h1>Prijave za  <?php if($school_name =='vse')
+        {
+            echo "Vse šole";
+        } else echo $school_name;?></h1>
+         <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label for="filter">Filter:</label>
+        <select id="filter" name="filter">
+            <option value="Vsi" <?php if ($_GET['filter'] == 'Vsi') echo 'selected'; ?>>Vsi</option>
+            <option value="Preteklo" <?php if ($_GET['filter'] == 'Preteklo') echo 'selected'; ?>>Preteklo</option>
+            <option value="Sprejeto" <?php if ($_GET['filter'] == 'Sprejeto') echo 'selected'; ?>>Sprejeto</option>
+            <option value="Zavrnjeno" <?php if ($_GET['filter'] == 'Zavrnjeno') echo 'selected'; ?>>Zavrnjeno</option>
+            <option value="Nedoločeno" <?php if ($_GET['filter'] == 'Nedoločeno') echo 'selected'; ?>>Nedoločeno</option>
+            <option value="Prihodnjo" <?php if ($_GET['filter'] == 'Prihodnjo') echo 'selected'; ?>>Prihodnjo</option>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
+    <br>
         <table>
             <thead>
                 <tr>
@@ -115,26 +132,32 @@ $conn->close();
                     <th>Email</th>
                     <th>Status</th>
                     <th>Opcije</th>
-                    
                 </tr>
             </thead>
             <tbody>
             <?php foreach ($prijave as $prijava): ?>
-                <tr>
-                    <td><a class="prijava-link" href="prikaz_prijava_admin.php?id=<?php echo $prijava['id_prijave']; ?>"><?php echo $prijava['ime_sole']; ?></a></td>
-                    <td><?php echo $prijava['e_naslov'] ?></td>
-                    <td class="<?php echo ($prijava['status'] == 'Sprejeto') ? 'sprejeto' : 'zavrnjeno'; ?>">
-    <?php echo $prijava['status']; ?>
-</td>
-                    <td class="btn-container">
-                    <form method="post">
-                                <input type="hidden" name="id_prijave" value="<?php echo $prijava['id_prijave']; ?>">
-                                <button class="btn sprejmi" type="submit" name="action" value="Sprejeto">Sprejmi</button>
-                                <button class="btn zavrni" type="submit" name="action" value="Zavrnjeno">Zavrni</button>
-                            </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+    <?php if ($_GET['filter'] == 'Vsi' || 
+              ($_GET['filter'] == 'Sprejeto' && $prijava['status'] == 'Sprejeto') || 
+              ($_GET['filter'] == 'Zavrnjeno' && $prijava['status'] == 'Zavrnjeno') || 
+              ($_GET['filter'] == 'Nedoločeno' && $prijava['status'] == 'Nedoločeno') || 
+              ($_GET['filter'] == 'Preteklo' && $prijava['datum_obiska'] < $current_date) || 
+              ($_GET['filter'] == 'Prihodnjo' && $prijava['datum_obiska'] >= $current_date)): ?>
+        <tr>
+            <td><a class="prijava-link" href="prikaz_prijava_admin.php?id=<?php echo $prijava['id_prijave']; ?>"><?php echo $prijava['ime_sole']; ?></a></td>
+            <td><?php echo $prijava['e_naslov'] ?></td>
+            <td class="<?php echo ($prijava['status'] == 'Sprejeto') ? 'sprejeto' : 'zavrnjeno'; ?>">
+                <?php echo $prijava['status']; ?>
+            </td>
+            <td class="btn-container">
+                <form method="post">
+                    <input type="hidden" name="id_prijave" value="<?php echo $prijava['id_prijave']; ?>">
+                    <button class="btn sprejmi" type="submit" name="action" value="Sprejeto">Sprejmi</button>
+                    <button class="btn zavrni" type="submit" name="action" value="Zavrnjeno">Zavrni</button>
+                </form>
+            </td>
+        </tr>
+    <?php endif; ?>
+<?php endforeach; ?>
             </tbody>
         </table>
     </div>

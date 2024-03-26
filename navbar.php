@@ -54,7 +54,7 @@ if(isset($_COOKIE['admin'])){
 <body>
 <nav class="navbar">
   <div class="navbar-left">
-    <a href="mainpage.php?filter=all"><img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/scv.svg" alt="Logo" width="230" height="140"></a>
+    <a href="mainpage.php?filter=Vsi"><img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/scv.svg" alt="Logo" width="230" height="140"></a>
   </div>
   <div class="navbar-right">
     <ul>

@@ -5,7 +5,10 @@ include 'baza.php';
 if(isset($_GET['id']) && !empty($_GET['id'])) {
     $prijava_id = $_GET['id'];
     
-    $query = "SELECT * FROM prijave WHERE id_prijave = ?";
+    $query = "SELECT p.*, s.ime_sole AS school_name 
+              FROM prijave p 
+              INNER JOIN sole s ON p.sola_id = s.id_sole 
+              WHERE id_prijave = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('i', $prijava_id);
     $stmt->execute();
@@ -73,7 +76,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <label>Urnik obiska:</label> <?php echo $prijava['urnik_obiska']; ?>
         </div>
         <div class="detail">
-            <label>Šola obiska:</label> <?php echo $prijava['sola_id']; ?>
+            <label>Šola obiska:</label> <?php echo $prijava['school_name']; ?>
         </div>
         <div class="detail">
             <label>Razred:</label> <?php echo $prijava['razred']; ?>
