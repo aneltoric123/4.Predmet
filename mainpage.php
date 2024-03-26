@@ -70,7 +70,7 @@ $conn->close();
         }
         .btn-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
         }
         .btn {
             padding: 8px 12px;
@@ -83,6 +83,7 @@ $conn->close();
             background-color: #4CAF50;
             color: white;
             margin-left: 5px;
+            font-weight: bold;
         }
         .sprejmi:hover {
             background-color: #45a049; 
@@ -91,6 +92,7 @@ $conn->close();
             background-color: #f44336;
             color: white;
             margin-left: 5px;
+            font-weight: bold;
         }
         .zavrni:hover {
             background-color: #d32f2f; 
@@ -102,6 +104,9 @@ $conn->close();
     .zavrnjeno {
         color: red;
         font-weight: bold;
+    }
+    .opcije{
+        text-align: center;
     }
         
     </style>
@@ -131,7 +136,7 @@ $conn->close();
                     <th>Ime Osnovne šole</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Opcije</th>
+                    <th class="opcije">Opcije</th>
                 </tr>
             </thead>
             <tbody>
