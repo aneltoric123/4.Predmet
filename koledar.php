@@ -2,12 +2,12 @@
 require_once 'navbar.php';
 include_once 'baza.php';
 
-$query = "SELECT * FROM prijave";
+$query = "SELECT p.*, s.ime_sole AS school_name FROM prijave p INNER JOIN sole s ON p.sola_id = s.id_sole";
 $result = $conn->query($query);
 $prijave = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $title = $row['ime_sole'] . ' - ' . 'Prijava' . ' (' . $row['status'] . ')'; 
+        $title = $row['school_name'] . ' - ' . $row['ime_sole'] . ' - ' . 'Prijava' . ' (' . $row['status'] . ')';
         $prijave[] = [
             'id' => $row['id_prijave'],
             'title' => $title,

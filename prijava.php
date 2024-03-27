@@ -93,10 +93,31 @@ require_once 'header.php';
                     <input type="text" id="drugace" name="drugacetext" style="visibility:hidden;">
                 </div>
             </div>
+          
             <div class="prasanje">
                 <label>Izberite datum obiska:</label>
                 <input type="date" name="field3" id="selectedDateInput" required  >
             </div>
+            <script>
+                    
+
+                    var allowedDates = <?php 
+                                        $sql = "SELECT datum FROM termini WHERE prosto = 1";
+                                        $result = $conn->query($sql);
+                                        echo "[";
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "'" . $row['datum'] . "', ";
+                                        }
+                                        echo "]";
+                                        $conn->close();
+                                        ?>;
+                    
+                    var selectedDateInput = document.getElementById('selectedDateInput');
+
+                    flatpickr("#selectedDateInput", {
+                        enable: allowedDates
+                    });
+                </script>
             <div class="prasanje">
                 <label for="urnik">Želen urnik obiska: <br>(pričetek, malica, zaključek)</label>
                 <select id="urnik" name="field4" required>
@@ -124,7 +145,7 @@ require_once 'header.php';
 
                     <div class="radiolayout">
                         <label>Gimnazija</label>
-                        <label>Elektro računalniška šola</label>
+                        <label>Elektro in računalniška šola</label>
                         <label>Šola za storitvene dejavnosti</label>
                         <label>Šola za strojništvo, geotehniko in okolje</label>
                         <label>Vse</label>
