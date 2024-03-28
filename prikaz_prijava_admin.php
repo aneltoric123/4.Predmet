@@ -33,6 +33,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Prikaz Prijave</title>
     <style>
         body {
@@ -40,16 +41,35 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             background-color: #f4f4f4;
            
         }
+        .delete_button{
+            text-align: center;
+        }
+       .btn-danger{
+        cursor: pointer;
+              background-color: red;
+              color: white;
+              border: none;
+              padding: 15px 25px;
+              border-radius: 40px;
+              font-size: 24px;
+              margin-top: 20px;
+              text-align: center;
+              transition: background-color 1s;
+       }
+       .btn-danger:hover{
+        background-color: darkred;
+    }
         .container {
             max-width: 800px;
-            margin: 20px auto;
+            margin: 40px auto;
             background-color: #fff;
             padding: 20px;
+
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            margin-top: 0;
+            
             text-align: center;
         }
         .detail {
@@ -98,6 +118,13 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
     </div>
     <div class="detail">
         <label>Status:</label> <?php echo $prijava['status']; ?>
+    </div>
+
+    <div class="delete_button">
+<form method="post" action="prijava_izbris.php?id=<?php echo $prijava['id_prijave']; ?>">
+    <input type="hidden" name="id_prijave" value="<?php  echo $prijava['id_prijave']; ?>">
+    <button type="submit" class="btn btn-danger">Izbriši</button>
+</form>
     </div>
 </body>
 </html>
