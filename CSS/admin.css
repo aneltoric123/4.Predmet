@@ -104,7 +104,7 @@ input[type="password"] {
 }
 
 .back-button:hover {
-    background-color: #ddd; /* Change to a slightly lighter shade on hover */
+    background-color: #ddd; 
 }
 
 

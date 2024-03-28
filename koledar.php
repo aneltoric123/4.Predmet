@@ -51,7 +51,7 @@ $conn->close();
 
 <script>
     $(document).ready(function() {
-        // Initialize the calendar
+       
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',

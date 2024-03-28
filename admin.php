@@ -67,7 +67,7 @@ $conn->close();
                         break;
                 }
             ?>;
-            font-family: Arial, sans-serif;
+            font-family: "Open-Sans", sans-serif;
             font-size: 14px;
             color: #000000;
         }
