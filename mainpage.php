@@ -7,6 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
     $action = $_POST['action'];
     $e_naslov = $_POST['e_naslov'];
     $st_ucencev=$_POST['st_ucencev'];
+    $urnik_obiska=$_POST['urnik_obiska'];
+$deli_urnika = explode(" (Malica: ", $urnik_obiska);
+$casovni_okvir = $deli_urnika[0];
+$malica = rtrim($deli_urnika[1], ")");
+list($zacetni_cas, $cas_po_malici) = explode(" - ", $casovni_okvir);
+list($cas_pred_malico, $koncni_cas) = explode(" - ", $malica);
+
     $update_query = "UPDATE prijave SET status = ? WHERE id_prijave = ?";
     $stmt = $conn->prepare($update_query);
     $stmt->bind_param('si', $action, $id_prijave);
@@ -26,6 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
     if ($action == "Sprejeto") {
         $to = $e_naslov;
         $subject = "Prijava Sprejeta";
+        if($school_name == "Njihova sola"){
+$message = "<html>
+<head>
+  <title>Prijava Sprejeta</title>
+</head>
+<body>
+  <p>Pozdravljeni,</p>
+  <p>Vaša prijava za dan dejavnosti na vaši šoli, je bila sprejeta. Prosimo vas da spodaj napišite podrobnosti o urniku delavnic in kako naj bi potekale.</p>";
+        }
+        else{
         $message = "
         <html>
         <head>
@@ -34,53 +51,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
         <body>
           <p>Pozdravljeni,</p>
           <p>Vaša prijava za ogled Šolskega centra Velenje in predstavitve poklicev, za katere izobražujejo, je bila sprejeta. Spodaj najdete podrobnosti o urniku delavnic:</p>
-         <p>Vi ste za obisk zbrali šolo ".$school_name." in ta bodo tudi delavnice potekale.</p>
+         <p>Vi ste za obisk zbrali šolo ".$school_name." in tam bodo tudi delavnice potekale.</p>
           <h2>Urnik Delavnic</h2>";
           
         if ($st_ucencev <= 20) {
             $message .= "
-            <p>Delavnice se izvajajo na lokaciji ŠC Velenje:</p>
+            <p>Delavnice se izvajajo na lokaciji ŠC Velenje.</p>
             <ul>
-              <li><strong>ŠC Velenje:</strong> 9:00 - 10:00 Predstavitev". $school_name ."</li>
-              <li><strong>ŠC Velenje:</strong> 10:00 - 10:30 Malica</li>
-              <li><strong>ŠČ Velenje:</strong> 10:30 - 12:00 Delavnica</li>
+              <li><strong>ŠC Velenje:</strong> <p>Začetni čas: " . $zacetni_cas . " - " . $cas_pred_malico . "</p> Predstavitev      "        .$school_name ."</li>
+              <li><strong>ŠC Velenje:</strong>Malica: " .$malica. "</li>
+              <li><strong>ŠČ Velenje:</strong> Končni čas: " . $koncni_cas . " - " . $cas_po_malici . " Delavnica " .$school_name."</li>
             </ul>";
         } elseif ($school_name == 'ERŠ' and $st_ucencev > 20) {
             $message .= "
-            <p>Razdeljeni boste v 2 skupine (Prosimo Vas, da skupine predhodno določite).Delavnice se izvajajo na 2 lokacijah Medpodjetniški izobraževalni center (MIC) in ŠČ Velenje:</p>
+            <p>Razdeljeni boste v 2 skupine (Prosimo Vas, da skupine predhodno določite).Delavnice se izvajajo na 2 lokacijah Medpodjetniški izobraževalni center (MIC) in ŠČ Velenje.</p>
             
             <ul>
-              <h1>Urnik za 1.Skupino:</h1> 
-              <li><strong>MIC:</strong>9:00 - 10:00 Predstavitev MIC-a</li>
-              <li><strong>MIC:</strong>10:00 - 10:30 Malica</li>
-              <li><strong>MIC:</strong>10:30 - 12:00 Delavnice na MIC-u</li>
+              <h3>Urnik za 1.Skupino:</h3> 
+              <li><strong>MIC:</strong>Začetni čas: " . $zacetni_cas . " - " . $cas_pred_malico . " Predstavitev MIC-a</li>
+              <li><strong>MIC:</strong>Malica: " .$malica. "</li>
+              <li><strong>MIC:</strong>Končni čas: " . $koncni_cas . " - " . $cas_po_malici . " Delavnice na MIC-u</li>
             </ul>
             <ul>
-            <h1>Urnik za 2.Skupino:</h1>
-            <li><strong>ŠCV:</strong>9:00 - 10:00 Predstavitev ŠCV-a</li>
-              <li><strong>ŠCV:</strong>10:00 - 10:30 Malica</li>
-              <li><strong>ŠCV:</strong>10:30 - 12:00 Delavnice na ŠCV-u</li>
+            <h3>Urnik za 2.Skupino:</h3>
+            <li><strong>ŠCV:</strong>Začetni čas: " . $zacetni_cas . " - " . $cas_pred_malico . " Predstavitev ŠCV-a</li>
+              <li><strong>ŠCV:</strong>Malica: " .$malica. "</li>
+              <li><strong>ŠCV:</strong>Končni čas: " . $koncni_cas . " - " . $cas_po_malici . " Delavnice na ŠCV-u</li>
             </ul>
             "
            ;
         }
         elseif($st_ucencev > 20 and $school_name != 'ERŠ'){
             $message .= "
-            <p>Razdeljeni boste v 2 skupine (Prosimo Vas, da skupine predhodno določite)</p>
+            <p>Razdeljeni boste v 2 skupine (Prosimo Vas, da skupine predhodno določite).</p>
             <ul>
-              <h1>Urnik za 1.Skupino:</h1> 
-              <li><strong>MIC:</strong>9:00 - 10:00 Predstavitev " .$school_name."</li>
-              <li><strong>MIC:</strong>10:00 - 10:30 Malica</li>
-              <li><strong>MIC:</strong>10:30 - 12:00 Delavnice na " .$school_name."</li>
+              <h3>Urnik za 1.Skupino:</h3> 
+              <li><strong>ŠCV:</strong>Začetni čas: " . $zacetni_cas . " - " . $cas_pred_malico . " Predstavitev " .$school_name."</li>
+              <li><strong>ŠCV:</strong>Malica: " .$malica. "</li>
+              <li><strong>ŠCV:</strong>Končni čas: " . $koncni_cas . " - " . $cas_po_malici . " Delavnice na " .$school_name."</li>
             </ul>
             <ul>
-            <h1>Urnik za 2.Skupino:</h1>
-            <li><strong>MIC:</strong>9:00 - 10:30 Delavnice na " .$school_name."</li>
-              <li><strong>ŠCV:</strong>10:30 - 11:00 Malica</li>
-              <li><strong>MIC:</strong>11:00 - 12:00 Predstavitev " .$school_name."</li>
+            <h3>Urnik za 2.Skupino:</h3>
+            <li><strong>ŠCV:</strong>Začetni čas: " . $zacetni_cas . " - " . $cas_pred_malico . " Delavnice na " .$school_name."</li>
+              <li><strong>ŠCV:</strong>Malica: " .$malica. "</li>
+              <li><strong>ŠCV:</strong>Končni čas: " . $koncni_cas . " - " . $cas_po_malici . " Predstavitev " .$school_name."</li>
             </ul>";
         }
-
+    }
         $message .= "
           <p>Več informacij lahko najdete na <a href='https://informativni.scv.si'>spletni strani</a> ŠC Velenje.</p>
           <p>Za dodatne informacije ali vprašanja sem vam na voljo na naslovu sabina.omic@scv.si ali na telefonski številki 031 693600.</p>
@@ -93,7 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: ŠC Velenje <noreply@scv.si>\r\n";
         $headers .= "Reply-To: sabina.omic@scv.si\r\n";
-
+        
+        
         if (mail($to, $subject, $message, $headers)) {
             echo "Email sent successfully!";
         } else {
@@ -101,7 +119,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_prijave'], $_POST['
         }
         exit();
     }
+    
+
+if ($action == "Zavrnjeno") {
+    $to = $e_naslov;
+    $subject = "Prijava Zavrnjena";
+    if($school_name == "Njihova sola"){
+    $message = " <html>
+    <head>
+      <title>Prijava Zavrnjena</title>
+    </head>
+    <body>
+      <p>Pozdravljeni,</p>
+      <p>Vaša prijava za dan dejavnosti na vaši šoli, je bila zavrnjena.</p>
+      <p>Lep pozdrav,<br>Peter Vrčkovnik<br>ŠC Velenje</p>
+    </body>
+    </html>";
+    }
+    else{
+    $message = "
+    <html>
+    <head>
+      <title>Prijava Zavrnjena</title>
+    </head>
+    <body>
+      <p>Pozdravljeni,</p>
+      <p>Vaša prijava za ogled Šolskega centra Velenje in predstavitve poklicev, za katere izobražujejo, je bila zavrnjena.</p>
+      <p>Lep pozdrav,<br>Peter Vrčkovnik<br>ŠC Velenje</p>
+    </body>
+    </html>
+    ";
+    }
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: ŠC Velenje <noreply@scv.si>\r\n";
+    $headers .= "Reply-To: sabina.omic@scv.si\r\n";
+
+ 
+    if (mail($to, $subject, $message, $headers)) {
+            echo "Email sent successfully!";
+        }  else {
+        echo "Email sending failed.";
+    }
+    exit();
 }
+}
+
 
 $query_school = "SELECT s.ime_sole,s.id_sole
                  FROM sole s
@@ -265,17 +328,25 @@ $conn->close();
                             <input type="hidden" name="id_prijave" value="<?php echo $prijava['id_prijave']; ?>">
                             <input type="hidden" name="st_ucencev" value="<?php echo $prijava['st_ucencev']; ?>">
                             <input type="hidden" name="e_naslov" value="<?php echo $prijava['e_naslov']; ?>">
+                            <input type="hidden" name="urnik_obiska" value="<?php echo $prijava['urnik_obiska']; ?>">
                             <button class="btn sprejmi" type="submit" name="action" value="Sprejeto">Sprejmi</button>
                             <button class="btn zavrni" type="submit" name="action" value="Zavrnjeno">Zavrni</button>
                         </form>
                     </td>
                 </tr>
+   
+
+
+
+       
             <?php endif; ?>
         <?php endforeach; ?>
         </tbody>
     </table>
 </div>
-
+<?php
+  
+?>
 
 </body>
 </html>
